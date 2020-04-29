@@ -1,0 +1,137 @@
+- Class: meta
+  Course: Variablen und Skalenwerte
+  Lesson: Variablen und Skalenwerte
+  Author: your name goes here
+  Type: Standard
+  Organization: your organization's name goes here
+  Version: 2.4.5
+
+- Class: text
+  Output: Willkommen zur dritten Lesson. Heute schauen wir uns an, wie wir mit Variablen umgehen und Skalenwerte erstellen koennen. 
+  
+
+- Class: cmd_question
+  Output: Bevor wir uns mit verschiedenen Variablentypen beschaeftigen koennen, muessen wir unsere Daten einlesen. Verwenden Sie hierfuer jetzt den Befehl "daten <- read.csv(dateipfad)"
+  CorrectAnswer: read.csv(dateipfad)
+  AnswerTests: omnitest(correctExpr='daten <- read.csv(dateipfad)')
+  Hint: Das war noch nicht korrekt. Kontrollieren Sie ihre Eingabe noch einmal. 
+
+- Class: text
+  Output: Wie Sie sehen, ist in der Environment jetzt das Objekt mit dem Namen "daten" erschienen. Das sind die Daten der Erhebung, an der Sie teilehmen konnten. Mit diesem Datensatz werden wir heute arbeiten. 
+
+- Class: cmd_question
+  Output: Zuerst schauen wir uns den Datensatz an. Die Funktion dafuer, haben Sie bereits kennengelernt; die View() Funktion. Tippen Sie nun "View(daten)" und fuehren Sie den Befehl aus. 
+  CorrectAnswer: View(daten)
+  AnswerTests: omnitest(correctExpr='View(daten)')
+  Hint: hint
+
+- Class: text
+  Output: Okay, das sieht nicht gut aus. Die Daten wurden offensichtlich nicht richtig eingelesen. 
+
+- Class: mult_question
+  Output: Woran koennte es liegen, dass die Daten nicht richtig eingelesen wurden?
+  AnswerChoices: Das Trennzeichen wurde nicht spezifiziert mit dem sep Argument; Das header Argument wurde nicht richtig gesetzt; Es wurde die read.csv() Funktion verwendet anstelle der read.table() Funktion
+  CorrectAnswer: Das Trennzeichen wurde nicht spezifiziert mit dem sep Argument
+  AnswerTests: omnitest(correctVal= 'Das Trennzeichen wurde nicht spezifiziert mit dem sep Argument')
+  Hint: Sind die einzelnen Datenpunkte richtig voneinander getrennt?
+
+- Class: mult_question
+  Output: Welchen Befehl muessen wir verwenden, damit die Daten richtig eingelesen werden?
+  AnswerChoices: read.csv(dateipfad, sep="");read.csv(dateipfad, header=TRUE);read.csv(dateipfad, header="")
+  CorrectAnswer: read.csv(dateipfad, sep="")
+  AnswerTests: omnitest(correctVal= 'read.csv(dateipfad, sep="")')
+  Hint: Die Trennzeichen muessen auf Leerzeichen, also "white space" eingestellt werden. 
+
+- Class: cmd_question
+  Output: Lesen Sie die Daten erneut mit dem richtigen Befehl ein. Legen Sie hierfuer ein neues Objekt an mit dem Namen "daten2".
+  CorrectAnswer: daten <- read.csv(dateipfad, sep="")
+  AnswerTests: omnitest(correctExpr='daten2 <- read.csv(dateipfad, sep="")')
+  Hint: Verwenden Sie den Befehl 'daten2 <- read.csv(dateipfad, sep="")'
+
+
+- Class: cmd_question
+  Output: Schauen Sie sich die Daten im Objekt "daten2" erneut mit dem View() Befehl an. 
+  CorrectAnswer: View(daten)
+  AnswerTests: omnitest(correctExpr='View(daten2)')
+  Hint: Verwenden Sie den Befehl 'View(daten2)'. Das V ist gross. 
+
+- Class: text
+  Output: Wie Sie sehen,wurde der Datensatz korrekt eingelesen. Allerdings ist der Datensatz noch sehr unsauber. In den Spalten zwei und drei stehen z.B. Infos, die wir definitiv nicht brauchen werden. Wir koennen diese Variablen also loeschen. 
+
+- Class: mult_question
+  Output: Mit welchem Befehl koennen Sie die Spalten drei und vier loeschen?
+  AnswerChoices: daten2[,-c(3,4)];daten2[-c(3,4),];daten2[3:4,]
+  CorrectAnswer: daten2[,-c(3,4)]
+  AnswerTests: omnitest(correctVal= 'daten2[,-c(3,4)]')
+  Hint: Vor dem Komma stehen die Reihen, hinter dem Komma stehen die Spalten
+
+
+- Class: cmd_question
+  Output: Wenn Sie Variablen loeschen, ist es ratsam ein neues Objekt anzulegen und das alte Datenobjekt zu behalten. So gehen die Daten nicht verloren. Legen Sie ein neues Objekt an mit dem Namen "datenR", in welchem die Daten aus dem Objekt "daten2" ohne die Spalten drei und vier hinterlegt sind.  
+  CorrectAnswer: datenR <- daten2[,-c(3,4)]
+  AnswerTests: omnitest(correctExpr='datenR <- daten2[,-c(3,4)]')
+  Hint: Verwenden Sie den Befehl "datenR <- daten2[,-c(3,4)]"
+  
+
+- Class: cmd_question
+  Output: Wir haben gesehen, wie wir Variablen anhand Ihrer Spaltennummer loeschen koennen. Manchmal ist es aber auch hilfreich, Variablen ueber Ihren Namen zu loeschen. Das funktioniert sehr aehnlich. Lassen Sie sich zuerst die Namen aller Variablen in Ihrem Datensatz anzeigen mit "names(datenR)"
+  CorrectAnswer: names(datenR)
+  AnswerTests: omnitest(correctExpr='names(datenR)')
+  Hint: Tippen Sie "names(datenR)". 
+
+- Class: text
+  Output: Wir wollen nun die dritte Variable "MODE" loeschen. Wenn wir die Variable ueber die Spaltennummer loeschen wollten, dann koennten wir den Befehl datenR[,-3] verwenden. Um die Variable ueber Ihren Namen zu loeschen, muessen wir einige Befehle kombinieren. 
+
+- Class: cmd_question
+  Output: Tippen Sie "datenR <- datenR[,-which(names(datenR)=="MODE")]" und fuehren Sie den Befehl aus.
+  CorrectAnswer: datenR <- datenR[,-which(names(datenR)=="MODE")]
+  AnswerTests: omnitest(correctExpr='datenR <- datenR[,-which(names(datenR)=="MODE")]')
+  Hint: Der Befehl lautet "datenR[,-which(names(datenR)=="MODE")]"
+
+- Class: cmd_question
+  Output: Schauen Sie sich erneut die Variablenss an. Sehen Sie, dass die Variable "MODE" in der Tat geloescht wurde? Fuheren Sie den Befehl names(datenR) aus. 
+  CorrectAnswer: names(datenR)
+  AnswerTests: omnitest(correctExpr='names(datenR)')
+  Hint: Der Befehl lautet "names(datenR)"
+
+- Class: text
+  Output: Wir haben die Variable "MODE" also mit folgendem Befehl geloescht "datenR[,-which(names(datenR)=="MODE")]". Aber wie ist dieser Befehl aufgebaut? Schauen wir uns zuerst den Teil in den eckigen Klammern an. Vor dem Komma steht kein Befehl. Es werden also alle Reihen im Datensatz selektiert. Hinter dem Komma, steht der Befehl "-which(names(datenR)=="MODE")". Der Teil "names(datenR)=="MODE"" nimmt alle Variablennamen (names(datenR)) und testet, ob sie dem Namen "MODE" entsprechen (=="MODE"). Fuer jeden Variablennamen, gibt es dann einen Augabewert. Der Wert ist "FALSE" wenn der Variablenname nicht "MODE" ist, und "TRUE" wenn der Variablenname "MODE" ist. Da es nur eine Varibale mit dem Namen "MODE" gibt, ist der Wert nur fuer diese eine Variabel "TRUE". Fuer alle anderen Variablen, ist der Wert "FALSE". Um den Befehl "names(datenR)=="MODE"", haben wir die Funktion "which()" geschachtelt. Diese Funktion gibt die Nummer der Variable aus, fuer welche der Wert "TRUE" ist, d.h. die Spaltennummer der Variable, die den Namen "MODE" traegt. Zu guter Letzt, haben wir ein Minus vor den Befehl gesetzt. Dieses Minus gibt an, dass wir alle Spalten selektieren, ausser der Spalte, die den Namen "MODE" traegt. Da dieser ganze Befehl hinter dem Komma steht, bezieht er sich auf die Spalten. Kurz, wir selektieren alle Spalten (also alle Variablen) ausser der Spalte, in der die Variable mit dem Namen "MODE" hinterlegt ist. 
+
+- Class: text
+  Output: Oft wollen wir aus verschiedenen Variablen einen Skalenwert errechnen. Dieser Skalenwert gibt fuer jede Versuchsperson den Mittelwert aller Items wieder. Zur Uebungszwecken, wollen wir nun den Skalenwert der Variablen "UN01_01" und "UN01_02" berechnen. Dafuer muessen wir zuerst diese Variablen in unseren Datenobjekt selektieren. Dann muessen wir den Mittelwert aus diesen Items berechnen. 
+
+- Class: cmd_question
+  Output: Legen Sie ein neues Objekt an mit den Items "UN01_01" und "UN01_02". Tippen Sie "datenUN <- datenR[,c("UN01_01","UN01_02")]"
+  CorrectAnswer: datenUN <- datenR[,c("UN01_01","UN01_02")]
+  AnswerTests: omnitest(correctExpr='datenUN <- datenR[,c("UN01_01","UN01_02")]')
+  Hint: Der Befehl lautet "datenUN <- datenR[,c("UN01_01","UN01_02")]"
+
+- Class: text
+  Output: In dem Objekt "datenUN" sind nun nur die beiden Variablen "UN01_01" und "UN01_02" hinterlegt. Um einen Skalenwert zu berechnen, muessen wir nur noch die Mittelwerte dieser beiden Variablen berechnen. Wir wollen einen Mittelwert pro Person. Da die Personen in den Reihen stehen, wollen wir also einen Mittelwert pro Reihe. Dafuer verwenden wir die rowMeans() Funktion. 
+
+- Class: cmd_question
+  Output: Verwenden Sie den Befehl "datenUN$Skala <- rowMeans(datenUN)"
+  CorrectAnswer: datenUN$Skala <- rowMeans(datenUN)
+  AnswerTests: omnitest(correctExpr='datenUN$Skala <- rowMeans(datenUN)')
+  Hint: Kontrollieren Sie ihre Eingabe noch einmal. Das war noch nicht ganz korrekt. 
+
+- Class: text
+  Output: Wir haben jetzt dem Objekt "datenUN" eine neue Variable zugefuegt mit dem Namen "Skala". Das Dollarzeichen gibt also an, dass wir im Objekt "datenUN" die Variable "Skala" ansprechen. Mit der rowMeans() Funktion, haben wir fuer jede VPN (also jede Reihe) einen Mittelwert berechnet ueber alle Spalten hinweg. 
+
+- Class: text
+  Output: Als letztes, wollen wir noch einmal wiederholen, wie wir Variablen benennen koennen. Dafuer gibt es die colnames() Funktion fuer die Namen der Spalen und die rownames() Funktion fuer die Namen der Reihen. Unser "datenUN" Objekt hat drei Spalten. Diese Spalten haben bereits Namen, die wir im Folgenden ueberschreiben werden. 
+
+- Class: cmd_question
+  Output: Tippen Sie "colnames(datenUN) <- c("Var1", "Var2", "Mittelwert")" und fuehren Sie den Befehl aus. 
+  CorrectAnswer: colnames(datenUN) <- c("Var1", "Var2", "Mittelwert")
+  AnswerTests: omnitest(correctExpr='colnames(datenUN) <- c("Var1", "Var2", "Mittelwert")')
+  Hint: Ihre Eingabe war noch nicht korrekt. Irgendwo ist noch ein Tippfehler. 
+
+- Class: cmd_question
+  Output: Mit dem Befehl names(datenUN) koennen Sie sich nun die Namen der Variablen anzeigen lassen. Fuehren Sie den Befehl nun aus. 
+  CorrectAnswer: names(datenUN)
+  AnswerTests: omnitest(correctExpr='names(datenUN)')
+  Hint: Kontrollieren Sie ihre Eingabe noch einmal. 
+
+- Class: text
+  Output: Das war die dritte Lesson. Bis naechste Woche!
